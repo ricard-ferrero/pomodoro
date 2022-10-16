@@ -18,11 +18,13 @@ btnChrono.addEventListener('click', e => {
 	if (clsList.contains('waiting')) {
 		btnChrono.innerText = 'Stop';
 		clsList.replace('waiting', 'working');
+		clsList.replace('btn-success', 'btn-danger');
 		startChrono();
 	
 	} else if (clsList.contains('working')) {
 		btnChrono.innerText = 'Start';
 		clsList.replace('working', 'waiting');
+		clsList.replace('btn-danger', 'btn-success');
 		stopChrono();
 	}
 });
