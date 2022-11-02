@@ -17,21 +17,24 @@
 	</div>
 
 
-	<div class="container">
-		<div class="">
-			<label for="working-time">Working time</label>
-			<input type="number" id="working-time" min="1" max="60" value="25">
+	<div class="container text-center">
+		<div class="d-flex justify-content-around">
+			<div class="my-2">
+				<label class="form-label m-0" for="working-time">Working time</label>
+				<input class="form-control" type="number" id="working-time" min="1" max="60" value="25">
+			</div>
+			<div class="my-2">
+				<label class="form-label m-0"  for="short-break">Short break</label>
+				<input class="form-control" type="number" id="short-break" min="1" max="60" value="5">
+			</div>
+			<div class="my-2">
+				<label class="form-label m-0"  for="long-break">Long break</label>
+				<input class="form-control" type="number" id="long-break" min="1" max="60" value="20">
+			</div>
 		</div>
-		<div class="">
-			<label for="short-break">Short break</label>
-			<input type="number" id="short-break" min="1" max="60" value="5">
-		</div>
-		<div class="">
-			<label for="long-break">Long break</label>
-			<input type="number" id="long-break" min="1" max="60" value="20">
-		</div>
-		<button id="reset-button">Reset</button>
+			<button id="reset-button" class="btn btn-secondary my-2">Reset</button>
 	</div>
+
 
 	<main class="container card shadow-lg bg-body rounded">
 		<div class="card-body text-center fs-1">
