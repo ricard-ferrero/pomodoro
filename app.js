@@ -1,7 +1,11 @@
-const workTime = 25
-const shortBreak = 5;
-const longBreak = 20;
+const WORKTIME = 25;
+const SHORTBREAK = 5;
+const LONGBREAK = 20;
 const workRounds = 4;
+
+let workTime = WORKTIME;
+let shortBreak = SHORTBREAK;
+let longBreak = LONGBREAK;
 
 let min = workTime;
 let sec = 0;

@@ -13,14 +13,28 @@
 		<header id="header" class="py-3 mb-4 border-bottom">
 			<h1 class="">Pomo d'Oro</h1>
 			<p>Be organized, be productive. Be an italian tomato.</p>
-		</header><!-- /header -->	
+		</header>
 	</div>
 
 
-	<main class="container card shadow-lg bg-body rounded">
-		<div id="container-options">
+	<div class="container">
+		<div class="">
+			<label for="working-time">Working time</label>
+			<input type="number" id="working-time" min="1" max="60" value="25">
 		</div>
-		<div id="container-chrono" class="card-body text-center fs-1">
+		<div class="">
+			<label for="short-break">Short break</label>
+			<input type="number" id="short-break" min="1" max="60" value="5">
+		</div>
+		<div class="">
+			<label for="long-break">Long break</label>
+			<input type="number" id="long-break" min="1" max="60" value="20">
+		</div>
+		<button id="reset-button">Reset</button>
+	</div>
+
+	<main class="container card shadow-lg bg-body rounded">
+		<div class="card-body text-center fs-1">
 			<div id="chrono-time" style="font-size: 5rem;">25:00</div>
 			<button type="button" id="chrono-button" class="waiting btn btn-success">Start</button>
 		</div>
@@ -28,7 +42,7 @@
 
 
 	<footer class="text-bg-dark py-3 mt-4 border-top fixed-bottom text-center">
-	      <p class="mb-0 mb-md-0">Made with <3 by Ricard Ferrero</p>
+	      <p class="mb-0 mb-md-0">Made with <span style="color: tomato;"><3</span> by Ricard Ferrero</p>
 	      <p class="mb-0 mb-md-0"><a href="https://github.com/ricard-ferrero"><img src="./github-icon.png" /></a></p>
   	</footer>
 
