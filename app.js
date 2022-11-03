@@ -13,6 +13,7 @@ let rounds = workRounds;
 let intervalId;
 let doingBreak = false;
 
+const divConfigureInputs = document.querySelector('#configure-inputs');
 const inputWorkTime = document.querySelector('#working-time');
 const inputShortBreak = document.querySelector('#short-break');
 const inputLongBreak = document.querySelector('#long-break');
@@ -20,6 +21,9 @@ const btnReset = document.querySelector('#reset-button');
 
 const btnChrono = document.querySelector('#chrono-button');
 const timeChrono = document.querySelector('#chrono-time');
+
+
+// CONFIGURE INPUTS
 
 inputWorkTime.addEventListener('input', e => {
 	if (e.target.value < 1) e.target.value = 1;
@@ -53,24 +57,27 @@ btnReset.addEventListener('click', e => {
 	printClock();
 });
 
+
+// CHRONO
+
 btnChrono.addEventListener('click', e => {
-	clsList = btnChrono.classList;
+	const clsList = btnChrono.classList;
 
 	if (clsList.contains('waiting')) {
 		btnChrono.innerText = 'Stop';
 		clsList.replace('waiting', 'working');
 		clsList.replace('btn-success', 'btn-danger');
+		divConfigureInputs.classList.add("d-none");
 		startChrono();
 	
 	} else if (clsList.contains('working')) {
 		btnChrono.innerText = 'Start';
 		clsList.replace('working', 'waiting');
 		clsList.replace('btn-danger', 'btn-success');
+		divConfigureInputs.classList.remove("d-none");
 		stopChrono();
 	}
 });
-
-let estado = `working ${rounds}`
 
 function startChrono() {
 	intervalId = setInterval(()=>{
@@ -84,19 +91,15 @@ function startChrono() {
 				doingBreak = true;
 				if (--rounds > 0) {
 					min = shortBreak;
-					estado = 'descanso';
 				} else {
 					min = longBreak;
-					estado = 'LOOOOOOOONG break'
 				}
 			} else {
 				doingBreak = false;
 				min = workTime;
 				if (rounds == 0) rounds = workRounds;
-				estado = `working ${rounds}`
 			}
 		}
-		console.log(estado)
 		printClock();
 	}, 1)
 }
