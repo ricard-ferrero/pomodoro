@@ -13,8 +13,45 @@ let rounds = workRounds;
 let intervalId;
 let doingBreak = false;
 
+const inputWorkTime = document.querySelector('#working-time');
+const inputShortBreak = document.querySelector('#short-break');
+const inputLongBreak = document.querySelector('#long-break');
+const btnReset = document.querySelector('#reset-button');
+
 const btnChrono = document.querySelector('#chrono-button');
 const timeChrono = document.querySelector('#chrono-time');
+
+inputWorkTime.addEventListener('input', e => {
+	if (e.target.value < 1) e.target.value = 1;
+	else if (e.target.value > 60) e.target.value = 60;
+	workTime = e.target.value;
+	min = workTime;
+	printClock();
+});
+
+inputShortBreak.addEventListener('input', e => {
+	if (e.target.value < 1) e.target.value = 1;
+	else if (e.target.value > 60) e.target.value = 60;
+	shortBreak = e.target.value;
+});
+
+inputLongBreak.addEventListener('input', e => {
+	if (e.target.value < 1) e.target.value = 1;
+	else if (e.target.value > 60) e.target.value = 60;
+	longBreak = e.target.value;
+});
+
+btnReset.addEventListener('click', e => {
+	inputWorkTime.value = WORKTIME;
+	inputShortBreak.value = SHORTBREAK;
+	inputLongBreak.value = LONGBREAK;
+	
+	workTime = WORKTIME;
+	shortBreak = SHORTBREAK;
+	longBreak = LONGBREAK;
+	min = workTime;
+	printClock();
+});
 
 btnChrono.addEventListener('click', e => {
 	clsList = btnChrono.classList;
@@ -70,7 +107,7 @@ function stopChrono() {
 
 	min = workTime;
 	sec = 0;
-	rounds = workTime;
+	rounds = workRounds;
 
 	printClock();
 }
