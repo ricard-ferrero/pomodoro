@@ -13,7 +13,6 @@ let rounds = workRounds;
 let intervalId;
 let doingBreak = false;
 
-const divConfigureInputs = document.querySelector('#configure-inputs');
 const inputWorkTime = document.querySelector('#working-time');
 const inputShortBreak = document.querySelector('#short-break');
 const inputLongBreak = document.querySelector('#long-break');
@@ -67,19 +66,20 @@ btnChrono.addEventListener('click', e => {
 		btnChrono.innerText = 'Stop';
 		clsList.replace('waiting', 'working');
 		clsList.replace('btn-success', 'btn-danger');
-		divConfigureInputs.classList.add("d-none");
+		disableConfigInputs();
 		startChrono();
 	
 	} else if (clsList.contains('working')) {
 		btnChrono.innerText = 'Start';
 		clsList.replace('working', 'waiting');
 		clsList.replace('btn-danger', 'btn-success');
-		divConfigureInputs.classList.remove("d-none");
+		enableConfigInputs();
 		stopChrono();
 	}
 });
 
 function startChrono() {
+	timeChrono.classList.replace('text-muted', 'text-primary')
 	intervalId = setInterval(()=>{
 		if (sec > 0) {
 			sec--;
@@ -105,6 +105,7 @@ function startChrono() {
 }
 
 function stopChrono() {
+	timeChrono.classList.replace('text-primary', 'text-muted')
 	clearInterval(intervalId);
 	intervalId = null;
 
@@ -131,4 +132,20 @@ function printClock() {
 	}
 
 	timeChrono.innerText = `${strMin}:${strSec}`
+}
+
+
+function enableConfigInputs() {
+	inputWorkTime.removeAttribute('disabled', '');
+	inputShortBreak.removeAttribute('disabled', '');
+	inputLongBreak.removeAttribute('disabled', '');
+	btnReset.removeAttribute('disabled', '');
+}
+
+
+function disableConfigInputs() {
+	inputWorkTime.setAttribute('disabled', '');
+	inputShortBreak.setAttribute('disabled', '');
+	inputLongBreak.setAttribute('disabled', '');
+	btnReset.setAttribute('disabled', '');
 }
