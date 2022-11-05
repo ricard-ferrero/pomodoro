@@ -13,6 +13,11 @@ let rounds = workRounds;
 let intervalId;
 let doingBreak = false;
 
+const sessions = ['Work - 1', 'Break - 1',
+				'Work - 2', 'Break - 2',
+				'Work - 3', 'Break - 3',
+				'Work - 4', 'Long Break'];
+
 const inputWorkTime = document.querySelector('#working-time');
 const inputShortBreak = document.querySelector('#short-break');
 const inputLongBreak = document.querySelector('#long-break');
@@ -20,7 +25,9 @@ const btnReset = document.querySelector('#reset-button');
 
 const btnChrono = document.querySelector('#chrono-button');
 const timeChrono = document.querySelector('#chrono-time');
+const sessionText = document.querySelector('#session');
 
+const bell = new Audio('bell.wav');
 
 // CONFIGURE INPUTS
 
@@ -61,6 +68,7 @@ btnReset.addEventListener('click', e => {
 
 btnChrono.addEventListener('click', e => {
 	const clsList = btnChrono.classList;
+	sessionText.classList.toggle('d-none');
 
 	if (clsList.contains('waiting')) {
 		btnChrono.innerText = 'Stop';
@@ -80,6 +88,9 @@ btnChrono.addEventListener('click', e => {
 
 function startChrono() {
 	timeChrono.classList.replace('text-muted', 'text-primary')
+	let onSession = 0;
+	sessionText.innerText = sessions[onSession];
+
 	intervalId = setInterval(()=>{
 		if (sec > 0) {
 			sec--;
@@ -87,6 +98,8 @@ function startChrono() {
 			min--;
 			sec = 59;
 		} else {
+			timeChrono.classList.toggle('text-primary');
+			timeChrono.classList.toggle('text-success');
 			if (!doingBreak) {
 				doingBreak = true;
 				if (--rounds > 0) {
@@ -99,13 +112,18 @@ function startChrono() {
 				min = workTime;
 				if (rounds == 0) rounds = workRounds;
 			}
+
+			if (++onSession == sessions.length) onSession = 0;
+			sessionText.innerText = sessions[onSession];
+			bell.play();
 		}
 		printClock();
-	}, 1)
+	}, 1000)
 }
 
 function stopChrono() {
-	timeChrono.classList.replace('text-primary', 'text-muted')
+	timeChrono.classList.remove('text-primary', 'text-success');
+	timeChrono.classList.add('text-muted');
 	clearInterval(intervalId);
 	intervalId = null;
 
@@ -139,7 +157,8 @@ function enableConfigInputs() {
 	inputWorkTime.removeAttribute('disabled', '');
 	inputShortBreak.removeAttribute('disabled', '');
 	inputLongBreak.removeAttribute('disabled', '');
-	btnReset.removeAttribute('disabled', '');
+	//btnReset.removeAttribute('disabled', '');
+	btnReset.classList.remove('d-none');
 }
 
 
@@ -147,5 +166,6 @@ function disableConfigInputs() {
 	inputWorkTime.setAttribute('disabled', '');
 	inputShortBreak.setAttribute('disabled', '');
 	inputLongBreak.setAttribute('disabled', '');
-	btnReset.setAttribute('disabled', '');
+	//btnReset.setAttribute('disabled', '');
+	btnReset.classList.add('d-none');
 }

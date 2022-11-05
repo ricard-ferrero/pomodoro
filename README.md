@@ -1,7 +1,4 @@
 # POMO D'ORO
-
-_in process_
-
 Be organized, be productive.
 Be an italian tomato.
 
